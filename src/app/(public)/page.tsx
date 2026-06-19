@@ -12,40 +12,42 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="py-20 px-4 text-center bg-white">
-        <h1 className="text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] text-[#1d1d1f] max-w-[680px] mx-auto">
-          Los mejores precios de tu ciudad, en un solo lugar
-        </h1>
-        <p className="text-[28px] font-light leading-[1.14] tracking-[0.196px] text-[#7a7a7a] mt-3 max-w-[600px] mx-auto">
-          Descubre negocios locales, compara precios y ahorra con tu membresia
-        </p>
-        <div className="flex items-center justify-center gap-4 mt-6">
-          <Link
-            href="/negocio"
-            className="inline-flex items-center justify-center rounded-full bg-[#0066cc] text-white text-[17px] font-normal tracking-[-0.374px] px-[22px] py-[11px] hover:bg-[#0071e3] active:scale-95 transition-transform"
-          >
-            Explorar negocios
-          </Link>
-          <Link
-            href="/login"
-            className="inline-flex items-center justify-center rounded-full border border-[#0066cc] text-[#0066cc] text-[17px] font-normal tracking-[-0.374px] px-[22px] py-[11px] hover:bg-[#0066cc]/5 active:scale-95 transition-all"
-          >
-            Obtener membresia
-          </Link>
+      <section className="relative min-h-[70vh] flex items-center justify-center px-4 text-center bg-white">
+        <div className="relative z-[2]">
+          <h1 className="text-[28px] sm:text-[34px] md:text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] text-[#1d1d1f] max-w-[90%] sm:max-w-[600px] md:max-w-[680px] mx-auto">
+            Los mejores precios de tu ciudad, en un solo lugar
+          </h1>
+          <p className="text-[20px] sm:text-[24px] md:text-[28px] font-light leading-[1.14] tracking-[0.196px] text-[#7a7a7a] mt-3 max-w-[90%] sm:max-w-[500px] md:max-w-[600px] mx-auto">
+            Descubre negocios locales, compara precios y ahorra con tu membresia
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-6">
+            <Link
+              href="/negocio"
+              className="inline-flex items-center justify-center rounded-full bg-[#0066cc] text-white text-[15px] sm:text-[17px] font-normal tracking-[-0.374px] px-[18px] sm:px-[22px] py-[10px] sm:py-[11px] hover:bg-[#0071e3] active:scale-95 transition-transform w-full sm:w-auto"
+            >
+              Explorar negocios
+            </Link>
+            <Link
+              href="/login"
+              className="inline-flex items-center justify-center rounded-full border border-[#0066cc] text-[#0066cc] text-[15px] sm:text-[17px] font-normal tracking-[-0.374px] px-[18px] sm:px-[22px] py-[10px] sm:py-[11px] hover:bg-[#0066cc]/5 active:scale-95 transition-all w-full sm:w-auto"
+            >
+              Obtener membresia
+            </Link>
+          </div>
         </div>
       </section>
 
       {featuredPromotions.length > 0 && (
-        <section className="py-20 px-4 bg-[#f5f5f7]">
+        <section className="py-12 sm:py-16 md:py-20 px-4 bg-[#f5f5f7]">
           <div className="max-w-[980px] mx-auto">
-            <h2 className="text-[34px] font-semibold leading-[1.47] tracking-[-0.374px] text-[#1d1d1f] text-center mb-12">
+            <h2 className="text-[28px] sm:text-[34px] font-semibold leading-[1.47] tracking-[-0.374px] text-[#1d1d1f] text-center mb-8 sm:mb-12">
               Ofertas destacadas
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {featuredPromotions.map((promo) => (
                 <div
                   key={promo.id}
-                  className="block bg-white rounded-[18px] border border-[#e0e0e0] p-6"
+                  className="block bg-white rounded-[18px] border border-[#e0e0e0] p-5 sm:p-6"
                 >
                   <Badge className="rounded-full bg-[#0066cc] hover:bg-[#0066cc] text-white text-xs mb-3">
                     {promo.type === "discount" ? "Descuento" : promo.type === "offer" ? "Oferta" : "Destacado"}
@@ -63,12 +65,12 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section className="py-20 px-4 bg-white">
+      <section className="py-12 sm:py-16 md:py-20 px-4 bg-white">
         <div className="max-w-[980px] mx-auto">
-          <h2 className="text-[34px] font-semibold leading-[1.47] tracking-[-0.374px] text-[#1d1d1f] text-center mb-3">
+          <h2 className="text-[28px] sm:text-[34px] font-semibold leading-[1.47] tracking-[-0.374px] text-[#1d1d1f] text-center mb-2 sm:mb-3">
             Negocios locales
           </h2>
-          <p className="text-[17px] text-[#7a7a7a] text-center mb-12">
+          <p className="text-[15px] sm:text-[17px] text-[#7a7a7a] text-center mb-8 sm:mb-12 tracking-[-0.374px]">
             {businesses.length} negocio{businesses.length !== 1 ? "s" : ""} disponible{businesses.length !== 1 ? "s" : ""}
           </p>
           {businesses.length === 0 ? (
@@ -78,7 +80,7 @@ export default async function HomePage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {businesses.map((business) => (
                 <BusinessCard key={business.id} business={business} />
               ))}

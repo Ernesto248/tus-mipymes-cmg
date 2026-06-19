@@ -4,18 +4,19 @@ import * as schema from "./schema"
 
 let _db: ReturnType<typeof createDb> | null = null
 
-function withRetry<T>(fn: () => Promise<T>, retries: number): Promise<T> {
+function withRetry<T>(fn: () => Promise<T>, retries: number, delay: number): Promise<T> {
   return fn().catch(async (err) => {
     if (retries <= 1) throw err
-    await new Promise((r) => setTimeout(r, 500))
-    return withRetry(fn, retries - 1)
+    await new Promise((r) => setTimeout(r, delay))
+    return withRetry(fn, retries - 1, delay * 2)
   })
 }
 
 neonConfig.fetchFunction = (url: string, options: any) => {
   return withRetry(
     () => fetch(url, options),
-    3,
+    5,
+    500,
   ) as Promise<Response>
 }
 

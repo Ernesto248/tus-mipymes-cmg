@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
+import { PROVINCIAS, DEFAULT_PROVINCIA } from "@/lib/provincias"
 
 const types = [
   { value: "supermarket", label: "Supermercado" },
@@ -28,6 +29,7 @@ interface BusinessFormProps {
     name?: string
     description?: string
     type?: string
+    provincia?: string
     address?: string
     phone?: string
     whatsapp?: string
@@ -39,11 +41,13 @@ interface BusinessFormProps {
 
 export function BusinessForm({ action, defaultValues }: BusinessFormProps) {
   const [type, setType] = useState(defaultValues?.type || "other")
+  const [provincia, setProvincia] = useState(defaultValues?.provincia || DEFAULT_PROVINCIA)
   const [loading, setLoading] = useState(false)
 
   async function handleSubmit(formData: FormData) {
     setLoading(true)
     formData.set("type", type)
+    formData.set("provincia", provincia)
     await action(formData)
   }
 
@@ -74,6 +78,35 @@ export function BusinessForm({ action, defaultValues }: BusinessFormProps) {
               ))}
             </SelectContent>
           </Select>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="provincia">Provincia *</Label>
+          <Select value={provincia} onValueChange={(v) => setProvincia(v ?? DEFAULT_PROVINCIA)}>
+            <SelectTrigger className="rounded-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {PROVINCIAS.map((p) => (
+                <SelectItem key={p.value} value={p.value}>
+                  {p.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="discountPercentage">% Descuento membresia basica</Label>
+          <Input
+            id="discountPercentage"
+            name="discountPercentage"
+            type="number"
+            min="0"
+            max="100"
+            defaultValue={defaultValues?.discountPercentage || 0}
+            className="rounded-full"
+          />
         </div>
       </div>
       <div className="space-y-2">
@@ -112,18 +145,6 @@ export function BusinessForm({ action, defaultValues }: BusinessFormProps) {
             id="whatsapp"
             name="whatsapp"
             defaultValue={defaultValues?.whatsapp}
-            className="rounded-full"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="discountPercentage">% Descuento membresia basica</Label>
-          <Input
-            id="discountPercentage"
-            name="discountPercentage"
-            type="number"
-            min="0"
-            max="100"
-            defaultValue={defaultValues?.discountPercentage || 0}
             className="rounded-full"
           />
         </div>

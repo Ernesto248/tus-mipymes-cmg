@@ -2,11 +2,23 @@ import { db } from "@/db"
 import { businessesTable, categoriesTable } from "@/db/schema"
 import { eq, and } from "drizzle-orm"
 
-export async function getBusinesses() {
+export async function getBusinesses(provincia?: string) {
+  const where = provincia
+    ? and(eq(businessesTable.active, true), eq(businessesTable.provincia, provincia))
+    : eq(businessesTable.active, true)
+
   return db().query.businessesTable.findMany({
-    where: eq(businessesTable.active, true),
+    where,
     orderBy: (businesses, { desc }) => [desc(businesses.updatedAt)],
   })
+}
+
+export async function getProvincesWithBusinesses() {
+  const rows = await db()
+    .selectDistinct({ provincia: businessesTable.provincia })
+    .from(businessesTable)
+    .where(eq(businessesTable.active, true))
+  return rows.map((r) => r.provincia)
 }
 
 export async function getBusinessBySlug(slug: string) {
@@ -36,7 +48,7 @@ export async function getBusinessById(id: string) {
 
 export async function createBusiness(data: {
   name: string; slug: string; description?: string; type: string
-  address?: string; phone?: string; whatsapp?: string; logo?: string
+  provincia?: string; address?: string; phone?: string; whatsapp?: string; logo?: string
   discountPercentage?: number; premiumDiscountPercentage?: number
   priorityEnabled?: boolean; deliveryEnabled?: boolean; updatedBy?: string
 }) {

@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "tus-mipymes.nyc3.cdn.digitaloceanspaces.com",
+      },
     ],
   },
 }

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
+import { getProvinciaLabel } from "@/lib/provincias"
 import type { businessesTable } from "@/db/schema"
 
 type Business = typeof businessesTable.$inferSelect
@@ -46,6 +47,9 @@ export function BusinessCard({ business }: { business: Business }) {
           {business.address}
         </p>
       )}
+      <p className="text-xs text-[#0066cc] mb-2 tracking-[-0.12px]">
+        {getProvinciaLabel(business.provincia ?? "camaguey")}
+      </p>
       {(business.phone || business.whatsapp) && (
         <p className="text-xs text-[#7a7a7a] mb-3 tracking-[-0.12px]">
           {business.phone && <span>{business.phone}</span>}

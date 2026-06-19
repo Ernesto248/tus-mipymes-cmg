@@ -21,6 +21,7 @@ export default async function NewBusinessPage() {
       slug,
       description: formData.get("description") as string || undefined,
       type,
+      provincia: formData.get("provincia") as string || undefined,
       address: formData.get("address") as string || undefined,
       phone: formData.get("phone") as string || undefined,
       whatsapp: formData.get("whatsapp") as string || undefined,

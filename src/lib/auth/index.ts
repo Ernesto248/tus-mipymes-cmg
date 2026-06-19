@@ -18,6 +18,11 @@ export const auth = betterAuth({
     enabled: true,
     autoSignIn: true,
   },
+  user: {
+    additionalFields: {
+      provincia: { type: "string", required: false, defaultValue: "camaguey" },
+    },
+  },
   socialProviders: {},
   advanced: {
     cookiePrefix: "mipymes",

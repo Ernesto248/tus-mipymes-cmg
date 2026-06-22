@@ -21,6 +21,16 @@ export async function getProvincesWithBusinesses() {
   return rows.map((r) => r.provincia)
 }
 
+export async function getActiveBusinessTypes(provincia?: string) {
+  const conditions = [eq(businessesTable.active, true)]
+  if (provincia) conditions.push(eq(businessesTable.provincia, provincia))
+  const rows = await db()
+    .selectDistinct({ type: businessesTable.type })
+    .from(businessesTable)
+    .where(and(...conditions))
+  return rows.map((r) => r.type)
+}
+
 export async function getBusinessBySlug(slug: string) {
   return db().query.businessesTable.findFirst({
     where: and(eq(businessesTable.slug, slug), eq(businessesTable.active, true)),
@@ -63,6 +73,14 @@ export async function createBusiness(data: {
 export async function updateBusiness(id: string, data: Record<string, any>) {
   return db().update(businessesTable)
     .set({ ...data, updatedAt: new Date() })
+    .where(eq(businessesTable.id, id))
+    .returning()
+}
+
+export async function toggleBusinessActive(id: string, active: boolean) {
+  return db()
+    .update(businessesTable)
+    .set({ active, updatedAt: new Date() })
     .where(eq(businessesTable.id, id))
     .returning()
 }

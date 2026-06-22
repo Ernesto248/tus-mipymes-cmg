@@ -1,4 +1,4 @@
-import { getProvincesWithBusinesses } from "@/db/queries/businesses"
+import { getProvincesWithBusinesses, getActiveBusinessTypes } from "@/db/queries/businesses"
 import { eq } from "drizzle-orm"
 import { businessesTable } from "@/db/schema"
 import { db } from "@/db"
@@ -8,17 +8,18 @@ import { DEFAULT_PROVINCIA } from "@/lib/provincias"
 export default async function DirectoryPage() {
   const provincia = DEFAULT_PROVINCIA
 
-  const [businesses, activeProvinces] = await Promise.all([
+  const [businesses, activeProvinces, activeTypes] = await Promise.all([
     db().query.businessesTable.findMany({
       where: eq(businessesTable.active, true),
       orderBy: (businesses, { desc }) => [desc(businesses.updatedAt)],
     }),
     getProvincesWithBusinesses(),
+    getActiveBusinessTypes(provincia),
   ])
 
   return (
     <NegocioContent
-      initialData={{ businesses, activeProvinces }}
+      initialData={{ businesses, activeProvinces, activeTypes }}
       initialProvincia={provincia}
     />
   )

@@ -1,10 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { authClient } from "@/lib/auth/client"
-import { useRouter } from "next/navigation"
 import {
   LayoutDashboard,
   Store,
@@ -12,6 +11,7 @@ import {
   Tags,
   Users,
   LogOut,
+  Menu,
 } from "lucide-react"
 
 const navItems = [
@@ -22,11 +22,17 @@ const navItems = [
   { href: "/dashboard/membresias", label: "Membresias", icon: Users },
 ]
 
-export function DashboardSidebar() {
+export function DashboardSidebar({
+  open,
+  onClose,
+}: {
+  open: boolean
+  onClose: () => void
+}) {
   const pathname = usePathname()
   const router = useRouter()
 
-  return (
+  const content = (
     <aside className="w-60 min-h-screen bg-[#1d1d1f] text-white flex flex-col">
       <div className="h-11 flex items-center px-5 border-b border-white/10">
         <Link href="/dashboard" className="text-xs font-normal tracking-[-0.12px]">
@@ -41,11 +47,12 @@ export function DashboardSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onClose}
               className={cn(
                 "flex items-center gap-3 px-3 py-2 rounded-[8px] text-sm transition-colors",
                 isActive
                   ? "bg-white/15 text-white"
-                  : "text-white/60 hover:text-white hover:bg-white/10"
+                  : "text-white/60 hover:text-white hover:bg-white/10",
               )}
             >
               <Icon className="h-4 w-4" />
@@ -68,5 +75,22 @@ export function DashboardSidebar() {
         </button>
       </div>
     </aside>
+  )
+
+  return (
+    <>
+      <div className="hidden lg:block">{content}</div>
+      {open && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div
+            className="absolute inset-0 bg-black/50"
+            onClick={onClose}
+          />
+          <div className="relative z-10 h-full animate-in slide-in-from-left duration-200">
+            {content}
+          </div>
+        </div>
+      )}
+    </>
   )
 }

@@ -124,8 +124,9 @@ export default async function BusinessDetailPage({
               Precios actualizados. Pueden variar sin previo aviso.
             </p>
 
-            {categories.length > 0
-              ? categories.map((cat) => {
+            {categories.length > 0 ? (
+              <>
+                {categories.map((cat) => {
                   const catProducts = productsByCategory.get(cat.id) || []
                   if (catProducts.length === 0) return null
                   return (
@@ -144,30 +145,45 @@ export default async function BusinessDetailPage({
                       </div>
                     </div>
                   )
-                })
-              : (() => {
+                })}
+                {(() => {
                   const uncategorized = productsByCategory.get("sin-categoria") || []
-                  if (uncategorized.length === 0 && products.length === 0) {
-                    return (
-                      <div className="text-center py-12">
-                        <p className="text-[17px] text-[#7a7a7a]">
-                          No hay productos disponibles en este momento.
-                        </p>
-                      </div>
-                    )
-                  }
+                  if (uncategorized.length === 0) return null
                   return (
-                    <div className="bg-white rounded-[18px] border border-[#e0e0e0] overflow-hidden">
-                      {products.map((product) => (
-                        <ProductCard
-                          key={product.id}
-                          product={product}
-                          discountPercentage={business.discountPercentage ?? 0}
-                        />
-                      ))}
+                    <div className="mb-8">
+                      <h3 className="text-sm font-semibold text-[#7a7a7a] mb-3 tracking-[-0.224px] uppercase">
+                        General
+                      </h3>
+                      <div className="bg-white rounded-[18px] border border-[#e0e0e0] overflow-hidden">
+                        {uncategorized.map((product) => (
+                          <ProductCard
+                            key={product.id}
+                            product={product}
+                            discountPercentage={business.discountPercentage ?? 0}
+                          />
+                        ))}
+                      </div>
                     </div>
                   )
                 })()}
+              </>
+            ) : products.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-[17px] text-[#7a7a7a]">
+                  No hay productos disponibles en este momento.
+                </p>
+              </div>
+            ) : (
+              <div className="bg-white rounded-[18px] border border-[#e0e0e0] overflow-hidden">
+                {products.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    discountPercentage={business.discountPercentage ?? 0}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           <div>

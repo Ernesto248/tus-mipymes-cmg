@@ -34,6 +34,7 @@ export function RegisterForm() {
       email,
       password,
       provincia,
+      role: "member",
     })
 
     if (signUpError) {

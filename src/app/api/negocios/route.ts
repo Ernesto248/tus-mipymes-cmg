@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getBusinesses, getProvincesWithBusinesses } from "@/db/queries/businesses"
+import { getBusinesses, getProvincesWithBusinesses, getActiveBusinessTypes } from "@/db/queries/businesses"
 import { getFeaturedPromotions } from "@/db/queries/promotions"
 import { eq, and } from "drizzle-orm"
 import { businessesTable } from "@/db/schema"
@@ -14,18 +14,20 @@ export async function GET(request: Request) {
   if (provincia) conditions.push(eq(businessesTable.provincia, provincia))
   if (tipo) conditions.push(eq(businessesTable.type, tipo as any))
 
-  const [businesses, featuredPromotions, activeProvinces] = await Promise.all([
+  const [businesses, featuredPromotions, activeProvinces, activeTypes] = await Promise.all([
     db().query.businessesTable.findMany({
       where: and(...conditions),
       orderBy: (b, { desc }) => [desc(b.updatedAt)],
     }),
     getFeaturedPromotions(provincia),
     getProvincesWithBusinesses(),
+    getActiveBusinessTypes(provincia),
   ])
 
   return NextResponse.json({
     businesses,
     featuredPromotions,
     activeProvinces,
+    activeTypes,
   })
 }

@@ -10,6 +10,7 @@ import { DEFAULT_PROVINCIA, getProvinciaLabel } from "@/lib/provincias"
 interface NegocioInitialData {
   businesses: any[]
   activeProvinces: string[]
+  activeTypes: string[]
 }
 
 export function NegocioContent({
@@ -52,7 +53,7 @@ export function NegocioContent({
     await fetchData(provincia, value)
   }
 
-  const { businesses, activeProvinces } = data
+  const { businesses, activeProvinces, activeTypes = [] } = data
 
   return (
     <div className="py-20 px-4">
@@ -63,7 +64,7 @@ export function NegocioContent({
         <p className="text-[17px] text-[#7a7a7a] text-center mb-4">
           Descubre las mejores pymes de {getProvinciaLabel(provincia)}
         </p>
-        <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="flex flex-col items-center gap-3 mb-4 sm:flex-row sm:justify-center">
           <Suspense fallback={null}>
             <ProvinceSelector
               activeProvinces={activeProvinces}
@@ -71,7 +72,7 @@ export function NegocioContent({
               onChange={handleProvinciaChange}
             />
           </Suspense>
-          <CategoryFilter onTipoChange={handleTipoChange} selectedTipo={tipo} />
+          <CategoryFilter onTipoChange={handleTipoChange} selectedTipo={tipo} activeTypes={activeTypes} />
         </div>
         {loading && (
           <div className="text-center py-4">

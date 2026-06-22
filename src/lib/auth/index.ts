@@ -21,6 +21,7 @@ export const auth = betterAuth({
   user: {
     additionalFields: {
       provincia: { type: "string", required: false, defaultValue: "camaguey" },
+      role: { type: "string", required: false, defaultValue: "member" },
     },
   },
   socialProviders: {},

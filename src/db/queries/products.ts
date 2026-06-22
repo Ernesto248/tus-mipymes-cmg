@@ -17,7 +17,7 @@ export async function getAvailableProducts(businessId: string) {
 }
 
 export async function createProduct(data: {
-  name: string; description?: string; price: number; image?: string
+  name: string; description?: string; price: number; storePrice?: number; image?: string
   businessId: string; categoryId?: string; discountable?: boolean; updatedBy?: string
 }) {
   const { nanoid } = await import("nanoid")
@@ -36,4 +36,8 @@ export async function toggleProductAvailability(id: string, available: boolean) 
     .set({ available, updatedAt: new Date() })
     .where(eq(productsTable.id, id))
     .returning()
+}
+
+export async function deleteProduct(id: string) {
+  return db().delete(productsTable).where(eq(productsTable.id, id)).returning()
 }

@@ -10,7 +10,7 @@ import {
   jsonb,
 } from "drizzle-orm/pg-core"
 
-export const roleEnum = pgEnum("role", ["admin", "editor", "viewer"])
+export const roleEnum = pgEnum("role", ["admin", "editor", "viewer", "member"])
 
 export const membershipStatusEnum = pgEnum("membership_status", [
   "active",
@@ -42,8 +42,11 @@ export const usersTable = pgTable("users", {
   image: text("image"),
   phone: text("phone"),
   provincia: text("provincia").default("camaguey"),
+  role: roleEnum("role").default("member").notNull(),
   membershipStatus: membershipStatusEnum("membership_status").default("pending").notNull(),
   membershipExpiresAt: timestamp("membership_expires_at", { withTimezone: true }),
+  membershipStartedAt: timestamp("membership_started_at", { withTimezone: true }),
+  membershipNotes: text("membership_notes"),
   membershipType: text("membership_type").default("basic"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
@@ -59,6 +62,7 @@ export const sessionsTable = pgTable("sessions", {
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 })
 
 export const accountsTable = pgTable("accounts", {
@@ -127,6 +131,7 @@ export const productsTable = pgTable("products", {
   name: text("name").notNull(),
   description: text("description"),
   price: real("price").notNull(),
+  storePrice: real("store_price"),
   image: text("image"),
   available: boolean("available").default(true),
   discountable: boolean("discountable").default(true),

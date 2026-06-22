@@ -6,14 +6,14 @@ type Product = typeof productsTable.$inferSelect
 
 export function ProductCard({
   product,
-  discountPercentage,
 }: {
   product: Product
-  discountPercentage: number
+  discountPercentage?: number
 }) {
-  const discountedPrice = product.discountable
-    ? product.price * (1 - discountPercentage / 100)
-    : product.price
+  const hasStorePrice = product.storePrice && product.storePrice > product.price
+  const discountPct = hasStorePrice
+    ? Math.round(((product.storePrice! - product.price) / product.storePrice!) * 100)
+    : 0
 
   return (
     <div className="flex items-center gap-4 p-4 border-b border-[#f0f0f0] last:border-0">
@@ -40,14 +40,14 @@ export function ProductCard({
         )}
       </div>
       <div className="text-right flex-shrink-0">
-        {discountPercentage > 0 && product.discountable ? (
+        {hasStorePrice ? (
           <>
-            <p className="text-xs text-[#7a7a7a] line-through">{formatPrice(product.price)}</p>
+            <p className="text-xs text-[#7a7a7a] line-through">{formatPrice(product.storePrice!)}</p>
             <p className="text-[17px] font-semibold text-[#1d1d1f] tracking-[-0.374px]">
-              {formatPrice(discountedPrice)}
+              {formatPrice(product.price)}
             </p>
             <Badge className="rounded-full bg-green-100 text-green-700 hover:bg-green-100 text-[10px]">
-              -{discountPercentage}%
+              -{discountPct}%
             </Badge>
           </>
         ) : (

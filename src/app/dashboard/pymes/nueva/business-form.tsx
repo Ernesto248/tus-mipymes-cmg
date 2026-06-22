@@ -53,7 +53,7 @@ export function BusinessForm({ action, defaultValues }: BusinessFormProps) {
 
   return (
     <form action={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="name">Nombre *</Label>
           <Input
@@ -80,7 +80,7 @@ export function BusinessForm({ action, defaultValues }: BusinessFormProps) {
           </Select>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="provincia">Provincia *</Label>
           <Select value={provincia} onValueChange={(v) => setProvincia(v ?? DEFAULT_PROVINCIA)}>
@@ -118,7 +118,7 @@ export function BusinessForm({ action, defaultValues }: BusinessFormProps) {
           className="rounded-full"
         />
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="address">Direccion</Label>
           <Input
@@ -138,7 +138,7 @@ export function BusinessForm({ action, defaultValues }: BusinessFormProps) {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="whatsapp">WhatsApp</Label>
           <Input

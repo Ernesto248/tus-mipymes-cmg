@@ -3,6 +3,7 @@
 interface CategoryFilterProps {
   onTipoChange: (value: string) => void
   selectedTipo: string
+  activeTypes?: string[]
 }
 
 const types = [
@@ -18,10 +19,17 @@ const types = [
 export function CategoryFilter({
   onTipoChange,
   selectedTipo,
+  activeTypes,
 }: CategoryFilterProps) {
+  const filtered = activeTypes
+    ? types.filter((t) => t.value === "" || activeTypes.includes(t.value))
+    : types
+
+  if (filtered.length <= 1) return null
+
   return (
     <div className="flex flex-wrap gap-2 justify-center">
-      {types.map((t) => (
+      {filtered.map((t) => (
         <button
           key={t.value}
           onClick={() => onTipoChange(t.value)}

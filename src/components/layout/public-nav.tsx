@@ -7,6 +7,8 @@ export async function PublicNav() {
     headers: await headers(),
   })
 
+  const role = (session?.user as any)?.role
+
   return (
     <header>
       <nav className="h-11 bg-[#000000] text-white flex items-center justify-center px-4">
@@ -19,9 +21,13 @@ export async function PublicNav() {
               Negocios
             </Link>
             {session ? (
-              <Link href="/dashboard" className="text-xs font-normal tracking-[-0.12px] text-white/80 hover:text-white transition-colors">
-                Panel
-              </Link>
+              <>
+                {role === "admin" && (
+                  <Link href="/dashboard" className="text-xs font-normal tracking-[-0.12px] text-white/80 hover:text-white transition-colors">
+                    Panel
+                  </Link>
+                )}
+              </>
             ) : (
               <Link href="/login" className="text-xs font-normal tracking-[-0.12px] text-white/80 hover:text-white transition-colors">
                 Ingresar

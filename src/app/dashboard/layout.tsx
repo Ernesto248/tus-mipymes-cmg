@@ -1,7 +1,7 @@
-import { DashboardSidebar } from "@/components/layout/dashboard-sidebar"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
+import { DashboardLayoutClient } from "@/components/layout/dashboard-layout-client"
 
 export default async function DashboardLayout({
   children,
@@ -16,10 +16,10 @@ export default async function DashboardLayout({
     redirect("/login")
   }
 
-  return (
-    <div className="flex min-h-screen">
-      <DashboardSidebar />
-      <main className="flex-1 bg-[#f5f5f7] p-8">{children}</main>
-    </div>
-  )
+  const role = (session.user as any)?.role
+  if (role !== "admin") {
+    redirect("/")
+  }
+
+  return <DashboardLayoutClient>{children}</DashboardLayoutClient>
 }

@@ -25,8 +25,21 @@ export const auth = betterAuth({
     },
   },
   socialProviders: {},
+  trustedOrigins: [
+    "https://socioplus.leonardsolutions.dev",
+    "http://localhost:3000",
+  ],
   advanced: {
     cookiePrefix: "mipymes",
+    cookies: {
+      sessionCookie: {
+        name: "mipymes.session_token",
+        attributes: {
+          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
+        },
+      },
+    },
   },
   plugins: [nextCookies()],
 })

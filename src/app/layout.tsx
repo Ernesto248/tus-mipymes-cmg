@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   description:
     "Descubre las mejores pymes de tu ciudad, compara precios y accede a beneficios exclusivos con tu membresia.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
   },
 }
 

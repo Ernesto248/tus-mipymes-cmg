@@ -14,10 +14,24 @@ export const metadata: Metadata = {
   title: "MiPymes - Apoya tu comercio local",
   description:
     "Descubre las mejores pymes de tu ciudad, compara precios y accede a beneficios exclusivos con tu membresia.",
+  metadataBase: new URL("https://socioplus.leonardsolutions.dev"),
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
     apple: "/icon.svg",
+  },
+  openGraph: {
+    title: "MiPymes - Apoya tu comercio local",
+    description:
+      "Descubre las mejores pymes de tu ciudad, compara precios y accede a beneficios exclusivos con tu membresia.",
+    images: ["/icon.svg"],
+  },
+  twitter: {
+    card: "summary",
+    title: "MiPymes - Apoya tu comercio local",
+    description:
+      "Descubre las mejores pymes de tu ciudad, compara precios y accede a beneficios exclusivos con tu membresia.",
+    images: ["/icon.svg"],
   },
 }
 

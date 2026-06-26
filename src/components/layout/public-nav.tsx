@@ -29,6 +29,9 @@ export async function PublicNav() {
             <Link href="/negocio" className="text-xs font-normal tracking-[-0.12px] text-[#7a7a7a] hover:text-[#1d1d1f] transition-colors">
               Negocios
             </Link>
+            <Link href="/promociones" className="text-xs font-normal tracking-[-0.12px] text-[#7a7a7a] hover:text-[#1d1d1f] transition-colors">
+              Promociones
+            </Link>
             {session ? (
               <>
                 {role === "admin" && (

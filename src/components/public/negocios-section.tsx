@@ -2,9 +2,10 @@
 
 import { useState, Suspense } from "react"
 import { BusinessCard } from "@/components/public/business-card"
+import { PromotionCard } from "@/components/public/promotion-card"
 import { ProvinceSelector } from "@/components/public/province-selector"
-import { Badge } from "@/components/ui/badge"
 import { getProvinciaLabel } from "@/lib/provincias"
+import Link from "next/link"
 
 interface NegociosData {
   businesses: any[]
@@ -53,21 +54,24 @@ export function NegociosSection({
               className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 transition-opacity ${loading ? "opacity-50" : ""}`}
             >
               {featuredPromotions.map((promo: any) => (
-                <div
+                <PromotionCard
                   key={promo.id}
-                  className="block bg-white rounded-[18px] border border-[#e0e0e0] p-5 sm:p-6"
-                >
-                  <Badge className="rounded-full bg-[#0066cc] hover:bg-[#0066cc] text-white text-xs mb-3">
-                    {promo.type === "discount" ? "Descuento" : promo.type === "offer" ? "Oferta" : "Destacado"}
-                  </Badge>
-                  <h3 className="text-[17px] font-semibold text-[#1d1d1f] tracking-[-0.374px]">
-                    {promo.title}
-                  </h3>
-                  <p className="text-sm text-[#7a7a7a] mt-1 tracking-[-0.224px]">
-                    {promo.description}
-                  </p>
-                </div>
+                  title={promo.title}
+                  description={promo.description}
+                  type={promo.type}
+                  discountValue={promo.discountValue}
+                  businessName={promo.businessName}
+                  businessSlug={promo.businessSlug}
+                />
               ))}
+            </div>
+            <div className="text-center mt-8">
+              <Link
+                href="/promociones"
+                className="inline-flex items-center justify-center rounded-full border border-[#0066cc] text-[#0066cc] text-[15px] font-normal tracking-[-0.374px] px-[18px] py-[8px] hover:bg-[#0066cc]/5 active:scale-95 transition-all"
+              >
+                Ver todas las promociones
+              </Link>
             </div>
           </div>
         </section>

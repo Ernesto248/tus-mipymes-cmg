@@ -12,12 +12,14 @@ function withRetry<T>(fn: () => Promise<T>, retries: number, delay: number): Pro
   })
 }
 
-neonConfig.fetchFunction = (url: string, options: any) => {
-  return withRetry(
-    () => fetch(url, options),
-    5,
-    500,
-  ) as Promise<Response>
+if (process.env.NODE_ENV === "development") {
+  neonConfig.fetchFunction = (url: string, options: any) => {
+    return withRetry(
+      () => fetch(url, options),
+      5,
+      500,
+    ) as Promise<Response>
+  }
 }
 
 function createDb() {

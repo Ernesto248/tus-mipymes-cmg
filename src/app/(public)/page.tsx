@@ -36,10 +36,10 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-white/25 hidden sm:block z-[1]" />
         <div className="relative z-[2]">
           <h1 className="text-[28px] sm:text-[34px] md:text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] text-[#1d1d1f] max-w-[90%] sm:max-w-[600px] md:max-w-[680px] mx-auto [text-shadow:0_1px_6px_rgba(255,255,255,0.9)]">
-            Los mejores precios de tu ciudad, en un solo lugar
+            Tu membresia de descuentos en Cuba
           </h1>
           <p className="text-[20px] sm:text-[24px] md:text-[28px] font-normal leading-[1.14] tracking-[0.196px] text-[#3a3a3a] mt-3 max-w-[90%] sm:max-w-[500px] md:max-w-[600px] mx-auto [text-shadow:0_1px_4px_rgba(255,255,255,0.9)]">
-            Descubre negocios locales, compara precios y ahorra con tu membresia
+            Mas beneficios, menos gastos
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-6">
             <Link

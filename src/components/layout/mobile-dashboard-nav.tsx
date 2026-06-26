@@ -37,13 +37,10 @@ export function MobileDashboardNav() {
           />
           <nav className="relative z-10 w-60 h-full bg-[#1d1d1f] text-white flex flex-col animate-in slide-in-from-left duration-200">
             <div className="h-11 flex items-center justify-between px-5 border-b border-white/10">
-              <Link
-                href="/dashboard"
-                className="text-xs font-normal tracking-[-0.12px]"
-                onClick={() => setOpen(false)}
-              >
-                MiPymes Panel
-              </Link>
+                <Link href="/dashboard" className="flex items-center gap-2" onClick={() => setOpen(false)}>
+                  <img src="/icon.svg" alt="MiPymes" className="h-4 w-auto invert" />
+                  Panel
+                </Link>
               <button onClick={() => setOpen(false)} className="text-white/60 hover:text-white">
                 <X className="h-4 w-4" />
               </button>

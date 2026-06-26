@@ -13,8 +13,8 @@ export async function PublicNav() {
     <header>
       <nav className="h-11 bg-[#000000] text-white flex items-center justify-center px-4">
         <div className="flex items-center gap-5 max-w-[980px] w-full justify-between">
-          <Link href="/" className="text-xs font-normal tracking-[-0.12px]">
-            MiPymes
+          <Link href="/" className="flex items-center gap-2">
+            <img src="/icon.svg" alt="MiPymes" className="h-5 w-auto" />
           </Link>
           <div className="flex items-center gap-5">
             <Link href="/negocio" className="text-xs font-normal tracking-[-0.12px] text-white/80 hover:text-white transition-colors">

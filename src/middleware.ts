@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
+import { getSessionTokenFromCookies } from "@/lib/auth/session-cookie"
 
 const publicPaths = ["/", "/negocio", "/api/auth", "/api/upload"]
 const protectedPaths = ["/dashboard"]
@@ -24,8 +25,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (isProtectedPath(pathname)) {
-    const sessionToken =
-      request.cookies.get("mipymes_session_token")?.value
+    const sessionToken = getSessionTokenFromCookies(request.cookies.getAll())
 
     if (!sessionToken) {
       const redirectUrl = new URL("/login", request.url)

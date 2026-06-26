@@ -21,13 +21,13 @@ export default async function HomePage() {
     <div>
       <section className="relative min-h-[70vh] flex items-center justify-center px-4 text-center overflow-hidden">
         <img
-          src="https://tus-mipymes.nyc3.cdn.digitaloceanspaces.com/hero/pexels-sora-shimazaki-5926245.jpg"
+          src="https://tus-mipymes.nyc3.cdn.digitaloceanspaces.com/hero/socioplus-vertical.jpeg"
           alt=""
           className="absolute inset-0 w-full h-full object-cover z-0 sm:hidden"
           loading="eager"
         />
         <img
-          src="https://tus-mipymes.nyc3.cdn.digitaloceanspaces.com/hero/hero-horizontal.jpg"
+          src="https://tus-mipymes.nyc3.cdn.digitaloceanspaces.com/hero/socioplus-horizontal.jpeg"
           alt=""
           className="absolute inset-0 w-full h-full object-cover z-0 hidden sm:block"
           loading="eager"

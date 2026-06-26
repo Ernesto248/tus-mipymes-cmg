@@ -59,7 +59,7 @@ export async function sendMembershipEmail({
     <body>
       <div class="container">
         <div class="logo">
-          <strong style="font-size: 20px; color: #1d1d1f;">MiPymes</strong>
+          <strong style="font-size: 20px; color: #1d1d1f;">SocioPlus</strong>
         </div>
         <h1 class="title">Membresia ${statusLabel}</h1>
         <p class="subtitle">Hola ${userName}, tu plan ha sido actualizado.</p>
@@ -107,7 +107,7 @@ export async function sendMembershipEmail({
         }
         <div class="footer">
           <p>Gracias por apoyar el comercio local.</p>
-          <p>&#8212; Equipo MiPymes</p>
+          <p>&#8212; Equipo SocioPlus</p>
         </div>
       </div>
     </body>
@@ -116,15 +116,15 @@ export async function sendMembershipEmail({
 
   if (!resend) {
     console.log("[Email] RESEND_API_KEY not configured. Email would be sent to:", to)
-    console.log("[Email] Subject: Membresia MiPymes -", statusLabel)
+    console.log("[Email] Subject: Membresia SocioPlus -", statusLabel)
     return { ok: true, simulated: true }
   }
 
   try {
     const { error } = await resend.emails.send({
-      from: process.env.EMAIL_FROM || "MiPymes <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM || "SocioPlus <onboarding@resend.dev>",
       to,
-      subject: `Membresia MiPymes - ${statusLabel}`,
+      subject: `Membresia SocioPlus - ${statusLabel}`,
       html,
     })
     if (error) {

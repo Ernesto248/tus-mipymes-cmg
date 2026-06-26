@@ -23,7 +23,8 @@ export async function PublicNav() {
       <nav className="h-11 bg-white text-[#1d1d1f] flex items-center justify-center px-4 border-b border-[#e0e0e0]">
         <div className="flex items-center gap-5 max-w-[980px] w-full justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/icon.svg" alt="MiPymes" className="h-5 w-auto" />
+            <img src="/icon.svg" alt="SocioPlus" className="h-5 w-auto" />
+            <span className="text-[15px] font-semibold tracking-[-0.374px] text-[#1d1d1f]">SocioPlus</span>
           </Link>
           <div className="flex items-center gap-5">
             <Link href="/negocio" className="text-xs font-normal tracking-[-0.12px] text-[#7a7a7a] hover:text-[#1d1d1f] transition-colors">

@@ -36,7 +36,7 @@ export function DashboardSidebar({
     <aside className="w-60 min-h-screen bg-[#1d1d1f] text-white flex flex-col">
       <div className="h-11 flex items-center px-5 border-b border-white/10">
         <Link href="/dashboard" className="flex items-center gap-2">
-          <img src="/icon.svg" alt="MiPymes" className="h-4 w-auto invert" />
+          <img src="/icon.svg" alt="SocioPlus" className="h-4 w-auto invert" />
           Panel
         </Link>
       </div>

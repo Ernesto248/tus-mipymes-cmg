@@ -1,7 +1,9 @@
 import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
+import { headers, cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { DashboardLayoutClient } from "@/components/layout/dashboard-layout-client"
+
+export const runtime = "nodejs"
 
 export default async function DashboardLayout({
   children,
@@ -13,6 +15,7 @@ export default async function DashboardLayout({
   })
 
   if (!session) {
+    console.log("[Dashboard] No session. Available cookies:", (await cookies()).getAll().map((c) => c.name))
     redirect("/login")
   }
 

@@ -37,7 +37,7 @@ export const auth = betterAuth({
     cookiePrefix: "mipymes",
     cookies: {
       sessionCookie: {
-        name: "mipymes.session_token",
+        name: "mipymes_session_token",
         attributes: {
           sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
           secure: process.env.NODE_ENV === "production",

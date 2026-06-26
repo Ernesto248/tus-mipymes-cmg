@@ -25,8 +25,7 @@ export async function middleware(request: NextRequest) {
 
   if (isProtectedPath(pathname)) {
     const sessionToken =
-      request.cookies.get("mipymes.session_token")?.value ||
-      request.cookies.get("better-auth.session_token")?.value
+      request.cookies.get("mipymes_session_token")?.value
 
     if (!sessionToken) {
       const redirectUrl = new URL("/login", request.url)

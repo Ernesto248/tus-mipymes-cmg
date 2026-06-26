@@ -19,7 +19,7 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="relative min-h-screen flex flex-col items-center px-4 text-center overflow-hidden">
+      <section className="relative min-h-[calc(100dvh-44px)] flex flex-col items-center px-4 text-center overflow-hidden">
         <img
           src="https://tus-mipymes.nyc3.cdn.digitaloceanspaces.com/hero/socioplus-vertical.jpeg"
           alt=""

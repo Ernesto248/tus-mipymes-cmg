@@ -5,7 +5,10 @@ import { db } from "@/db"
 import * as schema from "@/db/schema"
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  baseURL: process.env.BETTER_AUTH_URL ||
+    (process.env.NODE_ENV === "production"
+      ? "https://socioplus.leonardsolutions.dev"
+      : "http://localhost:3000"),
   database: drizzleAdapter(db(), {
     provider: "pg",
     schema: {
@@ -36,7 +39,7 @@ export const auth = betterAuth({
       sessionCookie: {
         name: "mipymes.session_token",
         attributes: {
-          sameSite: "lax",
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
           secure: process.env.NODE_ENV === "production",
         },
       },

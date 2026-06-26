@@ -15,7 +15,11 @@ export default async function DashboardLayout({
   })
 
   if (!session) {
-    console.log("[Dashboard] No session. Available cookies:", (await cookies()).getAll().map((c) => c.name))
+    const allCookies = (await cookies()).getAll()
+    console.log("[Dashboard] Session null. baseURL:", process.env.BETTER_AUTH_URL || "NOT SET")
+    console.log("[Dashboard] NODE_ENV:", process.env.NODE_ENV)
+    console.log("[Dashboard] DATABASE_URL:", process.env.DATABASE_URL ? "SET" : "NOT SET")
+    console.log("[Dashboard] Cookies:", allCookies.map((c) => `${c.name}`))
     redirect("/login")
   }
 

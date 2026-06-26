@@ -1,17 +1,6 @@
 import { LoginForm } from "./login-form"
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
-import { redirect } from "next/navigation"
 
 export default async function LoginPage() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  })
-
-  if (session) {
-    redirect("/")
-  }
-
   return (
     <div className="bg-white rounded-[18px] border border-[#e0e0e0] p-8">
       <div className="text-center mb-8">

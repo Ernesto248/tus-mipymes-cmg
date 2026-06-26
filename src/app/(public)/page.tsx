@@ -34,7 +34,7 @@ export default async function HomePage() {
         />
         <div className="absolute inset-0 bg-white/40 sm:hidden z-[1]" />
         <div className="absolute inset-0 bg-white/10 hidden sm:block z-[1]" />
-        <div className="relative z-[2] flex flex-col justify-between flex-1 w-full max-w-[680px] py-24">
+        <div className="relative z-[2] flex flex-col justify-between flex-1 w-full max-w-[680px] pt-16 pb-20">
           <div>
             <h1 className="text-[28px] sm:text-[34px] md:text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] max-w-[90%] sm:max-w-[600px] md:max-w-[680px] mx-auto [text-shadow:0_1px_6px_rgba(255,255,255,0.9)]">
               <span className="text-[#0066cc]">Socio</span><span className="text-[#34c759]">+</span>

@@ -6,7 +6,7 @@ export function PublicFooter() {
       <div className="max-w-[980px] mx-auto">
         <div className="grid grid-cols-3 gap-8">
           <div>
-            <h3 className="text-sm font-semibold text-[#1d1d1f] mb-3">SocioPlus</h3>
+            <h3 className="text-sm font-semibold text-[#1d1d1f] mb-3">Socio+</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/negocio" className="text-xs text-[#7a7a7a] hover:text-[#0066cc] transition-colors">
@@ -36,7 +36,7 @@ export function PublicFooter() {
         </div>
         <div className="mt-8 pt-4 border-t border-[#e0e0e0]">
           <p className="text-[10px] text-[#7a7a7a]">
-            &copy; {new Date().getFullYear()} SocioPlus. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} Socio+. Todos los derechos reservados.
           </p>
         </div>
       </div>

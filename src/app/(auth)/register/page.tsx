@@ -19,7 +19,7 @@ export default async function RegisterPage() {
           Crear cuenta
         </h1>
         <p className="text-[17px] text-[#7a7a7a] mt-2 tracking-[-0.374px]">
-          Unete a SocioPlus y empieza a ahorrar
+          Unete a Socio+ y empieza a ahorrar
         </p>
       </div>
       <RegisterForm />

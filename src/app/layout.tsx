@@ -11,7 +11,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "SocioPlus - Apoya tu comercio local",
+  title: "Socio+ - Apoya tu comercio local",
   description:
     "Descubre las mejores pymes de tu ciudad, compara precios y accede a beneficios exclusivos con tu membresia.",
   metadataBase: new URL("https://socioplus.leonardsolutions.dev"),
@@ -21,14 +21,14 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   openGraph: {
-    title: "SocioPlus - Apoya tu comercio local",
+    title: "Socio+ - Apoya tu comercio local",
     description:
       "Descubre las mejores pymes de tu ciudad, compara precios y accede a beneficios exclusivos con tu membresia.",
     images: ["/icon.svg"],
   },
   twitter: {
     card: "summary",
-    title: "SocioPlus - Apoya tu comercio local",
+    title: "Socio+ - Apoya tu comercio local",
     description:
       "Descubre las mejores pymes de tu ciudad, compara precios y accede a beneficios exclusivos con tu membresia.",
     images: ["/icon.svg"],

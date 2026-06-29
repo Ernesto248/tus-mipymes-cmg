@@ -8,7 +8,7 @@ export default async function LoginPage() {
           Iniciar sesion
         </h1>
         <p className="text-[17px] text-[#7a7a7a] mt-2 tracking-[-0.374px]">
-          Accede a tu cuenta de SocioPlus
+          Accede a tu cuenta de Socio+
         </p>
       </div>
       <LoginForm />

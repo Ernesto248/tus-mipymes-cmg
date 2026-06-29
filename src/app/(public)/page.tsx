@@ -1,74 +1,68 @@
 import { getBusinesses, getProvincesWithBusinesses } from "@/db/queries/businesses"
 import { getFeaturedPromotions } from "@/db/queries/promotions"
+import { HeroSection } from "@/components/public/hero-section"
 import { NegociosSection } from "@/components/public/negocios-section"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
-import Link from "next/link"
 import { DEFAULT_PROVINCIA } from "@/lib/provincias"
+import { Suspense } from "react"
+import { unstable_rethrow } from "next/navigation"
 
 export default async function HomePage() {
-  const session = await auth.api.getSession({ headers: await headers() })
-  const userProvincia = (session?.user as any)?.provincia || null
-  const provincia = userProvincia || DEFAULT_PROVINCIA
-
-  const [businesses, featuredPromotions, activeProvinces] = await Promise.all([
-    getBusinesses(provincia),
-    getFeaturedPromotions(provincia),
-    getProvincesWithBusinesses(),
-  ])
-
   return (
     <div>
-      <section className="relative min-h-[calc(100dvh-44px)] flex flex-col items-center px-4 text-center overflow-hidden">
-        <img
-          src="https://tus-mipymes.nyc3.cdn.digitaloceanspaces.com/hero/socioplus-vertical.jpeg"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover z-0 sm:hidden brightness-110"
-          loading="eager"
-        />
-        <img
-          src="https://tus-mipymes.nyc3.cdn.digitaloceanspaces.com/hero/socioplus-horizontal.jpeg"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover z-0 hidden sm:block brightness-110"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-white/40 sm:hidden z-[1]" />
-        <div className="absolute inset-0 bg-white/10 hidden sm:block z-[1]" />
-        <div className="relative z-[2] flex flex-col justify-between flex-1 w-full max-w-[680px] pt-16 pb-20">
-          <div>
-            <h1 className="text-[28px] sm:text-[34px] md:text-[40px] font-semibold leading-[1.1] tracking-[-0.374px] max-w-[90%] sm:max-w-[600px] md:max-w-[680px] mx-auto [text-shadow:0_1px_6px_rgba(255,255,255,0.9)]">
-              <span className="text-[#0066cc]">Socio</span><span className="text-[#34c759]">+</span>
-            </h1>
-            <p className="text-[20px] sm:text-[24px] md:text-[28px] font-normal leading-[1.14] tracking-[0.196px] text-[#3a3a3a] mt-3 max-w-[90%] sm:max-w-[500px] md:max-w-[600px] mx-auto [text-shadow:0_1px_4px_rgba(255,255,255,0.9)]">
-              Tu membresia de descuentos en Cuba
-            </p>
-            <p className="text-[16px] sm:text-[18px] md:text-[20px] font-normal leading-[1.14] tracking-[0.196px] text-[#6e6e73] max-w-[90%] sm:max-w-[500px] md:max-w-[600px] mx-auto [text-shadow:0_1px_4px_rgba(255,255,255,0.9)]">
-              Mas beneficios, menos gastos
-            </p>
-          </div>
-          <div>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-              <Link
-                href="/negocio"
-                className="inline-flex items-center justify-center rounded-full bg-[#0066cc] text-white text-[15px] sm:text-[17px] font-normal tracking-[-0.374px] px-[18px] sm:px-[22px] py-[10px] sm:py-[11px] hover:bg-[#0071e3] active:scale-95 transition-transform w-full sm:w-auto"
-              >
-                Explorar negocios
-              </Link>
-              <Link
-                href="/login"
-                className="inline-flex items-center justify-center rounded-full border border-[#0066cc] text-[#0066cc] text-[15px] sm:text-[17px] font-normal tracking-[-0.374px] px-[18px] sm:px-[22px] py-[10px] sm:py-[11px] hover:bg-[#0066cc]/5 active:scale-95 transition-all w-full sm:w-auto"
-              >
-                Obtener membresia
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
+      <Suspense fallback={<NegociosSectionSkeleton />}>
+        <HomeNegocios />
+      </Suspense>
+    </div>
+  )
+}
 
+async function HomeNegocios() {
+  try {
+    const session = await auth.api.getSession({ headers: await headers() })
+    const userProvincia = (session?.user as any)?.provincia || null
+    const provincia = userProvincia || DEFAULT_PROVINCIA
+
+    const [businesses, featuredPromotions, activeProvinces] = await Promise.all([
+      getBusinesses(provincia),
+      getFeaturedPromotions(provincia),
+      getProvincesWithBusinesses(),
+    ])
+
+    return (
       <NegociosSection
         initialData={{ businesses, featuredPromotions, activeProvinces }}
         initialProvincia={provincia}
       />
-    </div>
+    )
+  } catch (error) {
+    unstable_rethrow(error)
+    return (
+      <NegociosSection
+        initialData={{ businesses: [], featuredPromotions: [], activeProvinces: [] }}
+        initialProvincia={DEFAULT_PROVINCIA}
+      />
+    )
+  }
+}
+
+function NegociosSectionSkeleton() {
+  return (
+    <section className="bg-white px-4 py-16">
+      <div className="mx-auto max-w-[980px]">
+        <div className="mx-auto mb-4 h-9 w-72 max-w-full rounded-full bg-[#f5f5f7]" />
+        <div className="mx-auto mb-10 h-8 w-40 rounded-full bg-[#f5f5f7]" />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[0, 1, 2].map((item) => (
+            <div
+              key={item}
+              className="h-48 rounded-[8px] border border-[#e0e0e0] bg-[#f5f5f7]"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
